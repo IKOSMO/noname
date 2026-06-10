@@ -1,15 +1,20 @@
-import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:noname/screens/messenger/notifiers/chats_screen_notifier.dart';
+import 'package:noname/screens/messenger/states/chats_screen_state.dart';
+import 'package:noname/tools/providers/providers.dart';
+import 'package:noname/tools/router/app_router.gr.dart';
 
 @RoutePage()
-class ChatsScreen extends StatefulWidget {
+class ChatsScreen extends ConsumerStatefulWidget {
   const ChatsScreen({super.key});
 
   @override
-  State<ChatsScreen> createState() => _ChatsScreenState();
+  ConsumerState<ChatsScreen> createState() => _ChatsScreenState();
 }
 
-class _ChatsScreenState extends State<ChatsScreen> {
+class _ChatsScreenState extends ConsumerState<ChatsScreen> {
   final TextEditingController searchController = TextEditingController();
   bool isFocused = false;
   bool isExpanded = false;
@@ -17,10 +22,16 @@ class _ChatsScreenState extends State<ChatsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return _build();
+    final chatsNotifier = ref.read(chatsScreenNotifier.notifier);
+    final chatsState = ref.watch(chatsScreenNotifier);
+
+    return _build(chatsNotifier: chatsNotifier, chatsState: chatsState);
   }
 
-  Widget _build() {
+  Widget _build({
+    required ChatsScreenNotifier chatsNotifier,
+    required ChatsScreenState chatsState,
+  }) {
     return Scaffold(
       backgroundColor: Colors.black,
       body: SizedBox.expand(
@@ -37,7 +48,10 @@ class _ChatsScreenState extends State<ChatsScreen> {
                           MediaQuery.of(context).size.height -
                       24,
                 ),
-                child: _buildChatsList(),
+                child: _buildChatsList(
+                  chatsNotifier: chatsNotifier,
+                  chatsState: chatsState,
+                ),
               ),
             ),
             _buildHeader(),
@@ -247,8 +261,12 @@ class _ChatsScreenState extends State<ChatsScreen> {
     );
   }
 
-  Widget _buildChatsList() {
+  Widget _buildChatsList({
+    required ChatsScreenNotifier chatsNotifier,
+    required ChatsScreenState chatsState,
+  }) {
     return ListView.builder(
+      controller: chatsState.chatsListScrollController,
       itemCount: 30,
       shrinkWrap: true,
       padding: EdgeInsets.only(
@@ -256,86 +274,92 @@ class _ChatsScreenState extends State<ChatsScreen> {
         bottom: MediaQuery.of(context).size.height * 0.3,
       ),
       itemBuilder: (context, index) {
-        return Container(
-          margin: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
-          width: MediaQuery.of(context).size.width,
-          height: 70,
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Container(
-                width: 65,
-                height: 65,
-                margin: EdgeInsets.only(right: 10),
-                child: Stack(
-                  children: [
-                    Positioned.fill(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(25),
-                        child: Image.asset('assets/images/person.png'),
+        return GestureDetector(
+          onTap: () => context.router.push(ChatRoute()),
+          behavior: HitTestBehavior.opaque,
+          child: Container(
+            margin: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+            width: MediaQuery.of(context).size.width,
+            height: 70,
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Container(
+                  width: 65,
+                  height: 65,
+                  margin: EdgeInsets.only(right: 10),
+                  child: Stack(
+                    children: [
+                      Positioned.fill(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(25),
+                          child: Image.asset('assets/images/person.png'),
+                        ),
                       ),
-                    ),
-                    Visibility(
-                      visible: index % 2 == 0 ? true : false,
-                      child: Positioned(
-                        bottom: 0,
-                        right: 0,
-                        child: Container(
-                          width: 17,
-                          height: 17,
-                          decoration: BoxDecoration(
-                            color: Colors.green,
-                            border: Border.all(color: Colors.black, width: 3),
-                            shape: BoxShape.circle,
+                      Visibility(
+                        visible: index % 2 == 0 ? true : false,
+                        child: Positioned(
+                          bottom: 0,
+                          right: 0,
+                          child: Container(
+                            width: 17,
+                            height: 17,
+                            decoration: BoxDecoration(
+                              color: Colors.green,
+                              border: Border.all(color: Colors.black, width: 3),
+                              shape: BoxShape.circle,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Алексей Грумцин',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w500,
-                            fontSize: MediaQuery.of(context).size.width * 0.05,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Алексей Грумцин',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.05,
+                            ),
                           ),
-                        ),
-                        Text(
-                          index % 2 == 0
-                              ? 'Только что'
-                              : index % 3 == 0
-                              ? '5 минут назад'
-                              : '18:54',
-                          style: TextStyle(
-                            color: const Color.fromARGB(183, 255, 255, 255),
-                            fontWeight: FontWeight.w400,
-                            fontSize: MediaQuery.of(context).size.width * 0.03,
+                          Text(
+                            index % 2 == 0
+                                ? 'Только что'
+                                : index % 3 == 0
+                                ? '5 минут назад'
+                                : '18:54',
+                            style: TextStyle(
+                              color: const Color.fromARGB(183, 255, 255, 255),
+                              fontWeight: FontWeight.w400,
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.03,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      'Привет! Как дела?',
-                      style: TextStyle(
-                        color: const Color.fromARGB(183, 255, 255, 255),
-                        fontWeight: FontWeight.w400,
-                        fontSize: MediaQuery.of(context).size.width * 0.035,
+                        ],
                       ),
-                    ),
-                  ],
+                      Text(
+                        'Привет! Как дела?',
+                        style: TextStyle(
+                          color: const Color.fromARGB(183, 255, 255, 255),
+                          fontWeight: FontWeight.w400,
+                          fontSize: MediaQuery.of(context).size.width * 0.035,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },

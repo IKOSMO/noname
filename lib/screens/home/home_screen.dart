@@ -1,16 +1,20 @@
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:noname/tools/providers/providers.dart';
 import 'package:noname/tools/router/app_router.gr.dart';
 
 @RoutePage()
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
   TabsRouter? _tabsRouter;
 
   @override
@@ -20,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
       onPopInvokedWithResult: (didPop, result) {
         if (didPop) return;
         final tabs = _tabsRouter;
+        log('${tabs?.activeIndex}');
         if (tabs != null && tabs.activeIndex != 0) {
           tabs.setActiveIndex(0);
           return;
@@ -38,13 +43,13 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class _NavigationBar extends StatelessWidget {
+class _NavigationBar extends ConsumerWidget {
   const _NavigationBar({required this.tabsRouter});
 
   final TabsRouter tabsRouter;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Material(
       color: Colors.transparent,
       elevation: 0,
@@ -72,7 +77,13 @@ class _NavigationBar extends StatelessWidget {
                 _NavIcon(
                   icon: Icons.message,
                   selected: tabsRouter.activeIndex == 0,
-                  onTap: () => tabsRouter.setActiveIndex(0),
+                  onTap: () {
+                    if (tabsRouter.activeIndex == 0) {
+                      ref.read(chatsScreenNotifier.notifier).scrollToTop();
+                      return;
+                    }
+                    tabsRouter.setActiveIndex(0);
+                  },
                 ),
                 const SizedBox(width: 15),
                 _NavIcon(

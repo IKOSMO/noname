@@ -8,15 +8,20 @@ class AppRouter extends RootStackRouter {
 
   @override
   List<AutoRoute> get routes => [
+    CustomRoute(
+      page: ChatRoute.page,
+      transitionsBuilder: TransitionsBuilders.slideLeft,
+      duration: const Duration(milliseconds: 200),
+      reverseDuration: const Duration(milliseconds: 200),
+    ),
+
+    AutoRoute(page: ProfileRoute.page),
+
     AutoRoute(
       page: HomeRoute.page,
       initial: true,
       children: [
-        AutoRoute(
-          page: ChatsRoute.page,
-          initial: true,
-          children: [AutoRoute(page: ChatRoute.page)],
-        ),
+        AutoRoute(page: ChatsRoute.page, initial: true),
         AutoRoute(page: SettingsRoute.page),
         AutoRoute(page: CallsRoute.page),
       ],
