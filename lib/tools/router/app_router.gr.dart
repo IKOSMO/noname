@@ -9,24 +9,25 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i8;
+import 'package:auto_route/auto_route.dart' as _i9;
 import 'package:noname/screens/calls/calls_screen.dart' as _i1;
-import 'package:noname/screens/home/home_screen.dart' as _i5;
+import 'package:noname/screens/home/home_screen.dart' as _i6;
 import 'package:noname/screens/messenger/views/chat_screen.dart' as _i2;
 import 'package:noname/screens/messenger/views/chats_screen.dart' as _i3;
 import 'package:noname/screens/messenger/views/chats_shell_screen.dart' as _i4;
-import 'package:noname/screens/profile/views/profile_screen.dart' as _i6;
-import 'package:noname/screens/settings/settings_screen.dart' as _i7;
+import 'package:noname/screens/profile/views/profile_screen.dart' as _i7;
+import 'package:noname/screens/settings/edit_account_data_screen.dart' as _i5;
+import 'package:noname/screens/settings/settings_screen.dart' as _i8;
 
 /// generated route for
 /// [_i1.CallsScreen]
-class CallsRoute extends _i8.PageRouteInfo<void> {
-  const CallsRoute({List<_i8.PageRouteInfo>? children})
+class CallsRoute extends _i9.PageRouteInfo<void> {
+  const CallsRoute({List<_i9.PageRouteInfo>? children})
     : super(CallsRoute.name, initialChildren: children);
 
   static const String name = 'CallsRoute';
 
-  static _i8.PageInfo page = _i8.PageInfo(
+  static _i9.PageInfo page = _i9.PageInfo(
     name,
     builder: (data) {
       return const _i1.CallsScreen();
@@ -36,13 +37,13 @@ class CallsRoute extends _i8.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.ChatScreen]
-class ChatRoute extends _i8.PageRouteInfo<void> {
-  const ChatRoute({List<_i8.PageRouteInfo>? children})
+class ChatRoute extends _i9.PageRouteInfo<void> {
+  const ChatRoute({List<_i9.PageRouteInfo>? children})
     : super(ChatRoute.name, initialChildren: children);
 
   static const String name = 'ChatRoute';
 
-  static _i8.PageInfo page = _i8.PageInfo(
+  static _i9.PageInfo page = _i9.PageInfo(
     name,
     builder: (data) {
       return const _i2.ChatScreen();
@@ -52,13 +53,13 @@ class ChatRoute extends _i8.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.ChatsScreen]
-class ChatsRoute extends _i8.PageRouteInfo<void> {
-  const ChatsRoute({List<_i8.PageRouteInfo>? children})
+class ChatsRoute extends _i9.PageRouteInfo<void> {
+  const ChatsRoute({List<_i9.PageRouteInfo>? children})
     : super(ChatsRoute.name, initialChildren: children);
 
   static const String name = 'ChatsRoute';
 
-  static _i8.PageInfo page = _i8.PageInfo(
+  static _i9.PageInfo page = _i9.PageInfo(
     name,
     builder: (data) {
       return const _i3.ChatsScreen();
@@ -68,13 +69,13 @@ class ChatsRoute extends _i8.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.ChatsShellScreen]
-class ChatsShellRoute extends _i8.PageRouteInfo<void> {
-  const ChatsShellRoute({List<_i8.PageRouteInfo>? children})
+class ChatsShellRoute extends _i9.PageRouteInfo<void> {
+  const ChatsShellRoute({List<_i9.PageRouteInfo>? children})
     : super(ChatsShellRoute.name, initialChildren: children);
 
   static const String name = 'ChatsShellRoute';
 
-  static _i8.PageInfo page = _i8.PageInfo(
+  static _i9.PageInfo page = _i9.PageInfo(
     name,
     builder: (data) {
       return const _i4.ChatsShellScreen();
@@ -83,49 +84,65 @@ class ChatsShellRoute extends _i8.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i5.HomeScreen]
-class HomeRoute extends _i8.PageRouteInfo<void> {
-  const HomeRoute({List<_i8.PageRouteInfo>? children})
+/// [_i5.EditAccountDataScreen]
+class EditAccountDataRoute extends _i9.PageRouteInfo<void> {
+  const EditAccountDataRoute({List<_i9.PageRouteInfo>? children})
+    : super(EditAccountDataRoute.name, initialChildren: children);
+
+  static const String name = 'EditAccountDataRoute';
+
+  static _i9.PageInfo page = _i9.PageInfo(
+    name,
+    builder: (data) {
+      return const _i5.EditAccountDataScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [_i6.HomeScreen]
+class HomeRoute extends _i9.PageRouteInfo<void> {
+  const HomeRoute({List<_i9.PageRouteInfo>? children})
     : super(HomeRoute.name, initialChildren: children);
 
   static const String name = 'HomeRoute';
 
-  static _i8.PageInfo page = _i8.PageInfo(
+  static _i9.PageInfo page = _i9.PageInfo(
     name,
     builder: (data) {
-      return const _i5.HomeScreen();
+      return const _i6.HomeScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i6.ProfileScreen]
-class ProfileRoute extends _i8.PageRouteInfo<void> {
-  const ProfileRoute({List<_i8.PageRouteInfo>? children})
+/// [_i7.ProfileScreen]
+class ProfileRoute extends _i9.PageRouteInfo<void> {
+  const ProfileRoute({List<_i9.PageRouteInfo>? children})
     : super(ProfileRoute.name, initialChildren: children);
 
   static const String name = 'ProfileRoute';
 
-  static _i8.PageInfo page = _i8.PageInfo(
+  static _i9.PageInfo page = _i9.PageInfo(
     name,
     builder: (data) {
-      return const _i6.ProfileScreen();
+      return const _i7.ProfileScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i7.SettingsScreen]
-class SettingsRoute extends _i8.PageRouteInfo<void> {
-  const SettingsRoute({List<_i8.PageRouteInfo>? children})
+/// [_i8.SettingsScreen]
+class SettingsRoute extends _i9.PageRouteInfo<void> {
+  const SettingsRoute({List<_i9.PageRouteInfo>? children})
     : super(SettingsRoute.name, initialChildren: children);
 
   static const String name = 'SettingsRoute';
 
-  static _i8.PageInfo page = _i8.PageInfo(
+  static _i9.PageInfo page = _i9.PageInfo(
     name,
     builder: (data) {
-      return const _i7.SettingsScreen();
+      return const _i8.SettingsScreen();
     },
   );
 }

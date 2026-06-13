@@ -16,6 +16,7 @@ class AppRouter extends RootStackRouter {
     ),
 
     AutoRoute(page: ProfileRoute.page),
+    AutoRoute(page: EditAccountDataRoute.page),
 
     AutoRoute(
       page: HomeRoute.page,

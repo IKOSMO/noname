@@ -1,7 +1,9 @@
 import 'dart:developer';
 
 import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:noname/tools/router/app_router.gr.dart';
 
 @RoutePage()
 class SettingsScreen extends StatefulWidget {
@@ -17,12 +19,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
 
-  final List<Map<String, dynamic>> settings = [
+  List<Map<String, dynamic>> settings({required BuildContext context}) => [
     {
       "name": 'Данные аккаунта',
       "description": 'Редактирование данных аккаунта',
       "icon": Icons.person_outline_rounded,
-      "onTap": () {},
+      "onTap": () => context.router.push(EditAccountDataRoute()),
     },
     {
       "name": 'Конфиденциальность',
@@ -61,16 +63,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   void initState() {
     super.initState();
-    animateSettings = List.from(settings);
+    animateSettings = List.from(settings(context: context));
   }
 
   void _filterSettings(String query) {
     final oldList = List<Map<String, dynamic>>.from(animateSettings);
 
     if (query.isEmpty) {
-      animateSettings = List.from(settings);
+      animateSettings = List.from(settings(context: context));
     } else {
-      animateSettings = settings.where((setting) {
+      animateSettings = settings(context: context).where((setting) {
         return setting['name'].toString().toLowerCase().contains(
               query.toLowerCase(),
             ) ||
