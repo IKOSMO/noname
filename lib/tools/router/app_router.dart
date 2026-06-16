@@ -16,15 +16,15 @@ class AppRouter extends RootStackRouter {
     ),
 
     AutoRoute(page: ProfileRoute.page),
-    AutoRoute(page: EditAccountDataRoute.page),
+    // AutoRoute(page: EditAccountDataRoute.page),
 
     AutoRoute(
       page: HomeRoute.page,
       initial: true,
       children: [
         AutoRoute(page: ChatsRoute.page, initial: true),
-        AutoRoute(page: SettingsRoute.page),
-        AutoRoute(page: CallsRoute.page),
+        // AutoRoute(page: CallsRoute.page),
+        AutoRoute(page: EditAccountDataRoute.page),
       ],
     ),
   ];

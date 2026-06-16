@@ -76,6 +76,8 @@ flutter:
   - assets/images/arrow_back.svg
   - assets/images/send.svg
   - assets/images/call.svg
+  - assets/images/chat_1.svg
+  - assets/images/settings.svg
 
   shaders:
   - shaders/blur.frag

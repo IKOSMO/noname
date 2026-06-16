@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:noname/tools/providers/providers.dart';
 import 'package:noname/tools/router/app_router.gr.dart';
 
@@ -31,7 +32,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         }
       },
       child: AutoTabsScaffold(
-        routes: const [ChatsRoute(), CallsRoute(), SettingsRoute()],
+        routes: const [ChatsRoute(), EditAccountDataRoute()],
         extendBody: true,
         backgroundColor: Colors.black,
         bottomNavigationBuilder: (_, tabsRouter) {
@@ -75,7 +76,7 @@ class _NavigationBar extends ConsumerWidget {
             child: Row(
               children: [
                 _NavIcon(
-                  icon: Icons.message,
+                  icon: "assets/images/chat_1.svg",
                   selected: tabsRouter.activeIndex == 0,
                   onTap: () {
                     if (tabsRouter.activeIndex == 0) {
@@ -86,16 +87,16 @@ class _NavigationBar extends ConsumerWidget {
                   },
                 ),
                 const SizedBox(width: 15),
+                // _NavIcon(
+                //   icon: Icons.call,
+                //   selected: tabsRouter.activeIndex == 1,
+                //   onTap: () => tabsRouter.setActiveIndex(1),
+                // ),
+                // const SizedBox(width: 15),
                 _NavIcon(
-                  icon: Icons.call,
+                  icon: "assets/images/settings.svg",
                   selected: tabsRouter.activeIndex == 1,
                   onTap: () => tabsRouter.setActiveIndex(1),
-                ),
-                const SizedBox(width: 15),
-                _NavIcon(
-                  icon: Icons.settings,
-                  selected: tabsRouter.activeIndex == 2,
-                  onTap: () => tabsRouter.setActiveIndex(2),
                 ),
               ],
             ),
@@ -113,7 +114,7 @@ class _NavIcon extends StatelessWidget {
     required this.onTap,
   });
 
-  final IconData icon;
+  final String icon;
   final bool selected;
   final VoidCallback onTap;
 
@@ -122,10 +123,12 @@ class _NavIcon extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       splashColor: Colors.transparent,
-      child: Icon(
+      child: SvgPicture.asset(
         icon,
-        color: selected ? Colors.white : Colors.white.withValues(alpha: 0.5),
-        size: 30,
+        colorFilter: ColorFilter.mode(
+          selected ? Colors.white : Colors.white.withValues(alpha: 0.5),
+          BlendMode.srcIn,
+        ),
       ),
     );
   }
