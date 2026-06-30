@@ -1,0 +1,17 @@
+name: noname_workspace
+
+packages:
+  - packages/**
+  - app
+
+command:
+  bootstrap:
+    usePubspecOverrides: true
+
+scripts:
+  analyze:
+    exec: dart analyze .
+  test:
+    exec: flutter test
+  clean:
+    exec: flutter clean
