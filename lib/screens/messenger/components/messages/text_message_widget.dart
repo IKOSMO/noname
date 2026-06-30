@@ -1,47 +1,40 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:noname/models/messages/base_message_model.dart';
 
-class MessageWidget extends StatefulWidget {
-  const MessageWidget({
-    super.key,
-    required this.id,
-    required this.name,
-    required this.text,
-    required this.isYou,
-  });
+class TextMessageWidget extends StatefulWidget {
+  const TextMessageWidget({super.key, required this.message});
 
-  final String text;
-  final String name;
-  final int id;
-  final bool isYou;
+  final TextMessageModel message;
 
   @override
-  State<MessageWidget> createState() => _MessageWidgetState();
+  State<TextMessageWidget> createState() => _TextMessageWidgetState();
 }
 
-class _MessageWidgetState extends State<MessageWidget> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
+class _TextMessageWidgetState extends State<TextMessageWidget> {
   @override
   Widget build(BuildContext context) {
-    if (widget.isYou) {
-      return myMessage(text: widget.text, name: widget.name, id: widget.id);
+    if (widget.message.isYou) {
+      return _messageContainer(
+        text: widget.message.text,
+        alignment: Alignment.centerRight,
+        color: Color.fromARGB(115, 60, 61, 63),
+      );
     } else {
-      return elsesMessage(text: widget.text, name: widget.name, id: widget.id);
+      return _messageContainer(
+        text: widget.message.text,
+        alignment: Alignment.centerLeft,
+        color: Color.fromARGB(62, 255, 255, 255),
+      );
     }
   }
 
-  Widget myMessage({
+  Widget _messageContainer({
     required String text,
-    required String name,
-    required int id,
+    required Alignment alignment,
+    required Color? color,
   }) {
     return Align(
-      alignment: Alignment.centerRight,
+      alignment: alignment,
       child: ConstrainedBox(
         constraints: BoxConstraints(
           maxWidth: MediaQuery.of(context).size.width * 0.7,
@@ -49,55 +42,25 @@ class _MessageWidgetState extends State<MessageWidget> {
         child: IntrinsicWidth(
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-            margin: const EdgeInsets.only(right: 20, bottom: 3, top: 3),
-            decoration: const BoxDecoration(
-              color: Color.fromARGB(115, 60, 61, 63),
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(25),
-                topRight: Radius.circular(25),
-                bottomLeft: Radius.circular(25),
-              ),
-            ),
-            child: messageText(text: text),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget elsesMessage({
-    required String text,
-    required String name,
-    required int id,
-  }) {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: ConstrainedBox(
-        constraints: BoxConstraints(
-          maxWidth: MediaQuery.of(context).size.width * 0.7,
-        ),
-        child: IntrinsicWidth(
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-            margin: const EdgeInsets.only(left: 20, bottom: 3, top: 3),
-            decoration: const BoxDecoration(
-              color: Color.fromARGB(62, 255, 255, 255),
+            margin: const EdgeInsets.only(bottom: 3, top: 3),
+            decoration: BoxDecoration(
+              color: color,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(25),
                 topRight: Radius.circular(25),
                 bottomRight: Radius.circular(25),
               ),
             ),
-            child: messageText(text: text),
+            child: _messageText(),
           ),
         ),
       ),
     );
   }
 
-  Widget messageText({required String text}) {
-    final double stringWidth = getStringWidth(
-      text: widget.text,
+  Widget _messageText() {
+    final double stringWidth = _getStringWidth(
+      text: widget.message.text,
       textStyle: TextStyle(
         fontWeight: FontWeight.w400,
         fontSize: MediaQuery.of(context).size.width * 0.035,
@@ -111,7 +74,7 @@ class _MessageWidgetState extends State<MessageWidget> {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Text(
-            text,
+            widget.message.text,
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w400,
@@ -130,7 +93,7 @@ class _MessageWidgetState extends State<MessageWidget> {
                   fontSize: MediaQuery.of(context).size.width * 0.025,
                 ),
               ),
-              if (widget.isYou) ...[
+              if (widget.message.isYou) ...[
                 SizedBox(width: 5),
                 Icon(
                   Icons.done_all_rounded,
@@ -144,13 +107,13 @@ class _MessageWidgetState extends State<MessageWidget> {
       );
     } else {
       return Column(
-        crossAxisAlignment: widget.isYou
+        crossAxisAlignment: widget.message.isYou
             ? CrossAxisAlignment.end
             : CrossAxisAlignment.start,
         children: [
           IntrinsicWidth(
             child: Text(
-              text,
+              widget.message.text,
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.w400,
@@ -160,7 +123,7 @@ class _MessageWidgetState extends State<MessageWidget> {
             ),
           ),
           Row(
-            mainAxisAlignment: widget.isYou
+            mainAxisAlignment: widget.message.isYou
                 ? MainAxisAlignment.end
                 : MainAxisAlignment.start,
             children: [
@@ -172,7 +135,7 @@ class _MessageWidgetState extends State<MessageWidget> {
                   fontSize: MediaQuery.of(context).size.width * 0.025,
                 ),
               ),
-              if (widget.isYou) ...[
+              if (widget.message.isYou) ...[
                 SizedBox(width: 5),
                 Icon(
                   Icons.done_all_rounded,
@@ -187,7 +150,7 @@ class _MessageWidgetState extends State<MessageWidget> {
     }
   }
 
-  double getStringWidth({required String text, required TextStyle textStyle}) {
+  double _getStringWidth({required String text, required TextStyle textStyle}) {
     final textSpan = TextSpan(text: text, style: textStyle);
 
     final textPainter = TextPainter(

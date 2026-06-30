@@ -1,8 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:noname/screens/messenger/notifiers/chats_screen_notifier.dart';
-import 'package:noname/screens/messenger/states/chats_screen_state.dart';
+import 'package:noname/tools/l10n/app_localizations.dart';
+import 'package:noname/screens/messenger/notifiers/chats_notifier.dart';
+import 'package:noname/screens/messenger/states/chats_state.dart';
 import 'package:noname/tools/providers/providers.dart';
 import 'package:noname/tools/router/app_router.gr.dart';
 
@@ -25,13 +26,14 @@ class _ChatsScreenState extends ConsumerState<ChatsScreen> {
     final chatsNotifier = ref.read(chatsScreenNotifier.notifier);
     final chatsState = ref.watch(chatsScreenNotifier);
 
-    return _build(chatsNotifier: chatsNotifier, chatsState: chatsState);
+    return _build(chatsNotifier: chatsNotifier, chatsState: chatsState,);
   }
 
   Widget _build({
-    required ChatsScreenNotifier chatsNotifier,
-    required ChatsScreenState chatsState,
+    required ChatsNotifier chatsNotifier,
+    required ChatsState chatsState,
   }) {
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: SizedBox.expand(
@@ -137,7 +139,7 @@ class _ChatsScreenState extends ConsumerState<ChatsScreen> {
                             errorBorder: InputBorder.none,
                             disabledBorder: InputBorder.none,
                             // isCollapsed: true,
-                            hintText: 'Поиск...',
+                            hintText: AppLocalizations.of(context)?.search_placeholder ?? '',
                             hintStyle: TextStyle(
                               color: const Color.fromARGB(193, 255, 255, 255),
                               fontSize:
@@ -262,8 +264,8 @@ class _ChatsScreenState extends ConsumerState<ChatsScreen> {
   }
 
   Widget _buildChatsList({
-    required ChatsScreenNotifier chatsNotifier,
-    required ChatsScreenState chatsState,
+    required ChatsNotifier chatsNotifier,
+    required ChatsState chatsState,
   }) {
     return ListView.builder(
       controller: chatsState.chatsListScrollController,

@@ -32,7 +32,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         }
       },
       child: AutoTabsScaffold(
-        routes: const [ChatsRoute(), EditAccountDataRoute()],
+        routes: const [ChatsRoute(), SettingsRoute()],
         extendBody: true,
         backgroundColor: Colors.black,
         bottomNavigationBuilder: (_, tabsRouter) {
@@ -51,57 +51,61 @@ class _NavigationBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Material(
-      color: Colors.transparent,
-      elevation: 0,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            margin: EdgeInsets.only(
-              bottom: MediaQuery.of(context).padding.bottom + 10,
-            ),
-            decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                colors: [
-                  Color.fromARGB(200, 146, 228, 194),
-                  Color.fromARGB(200, 182, 142, 226),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
+    return AnimatedSlide(
+      offset: Offset(0, 0),
+      duration: Duration(milliseconds: 300),
+      child: Material(
+        color: Colors.transparent,
+        elevation: 0,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              margin: EdgeInsets.only(
+                bottom: MediaQuery.of(context).padding.bottom + 10,
               ),
-              borderRadius: BorderRadius.circular(25),
-            ),
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-            child: Row(
-              children: [
-                _NavIcon(
-                  icon: "assets/images/chat_1.svg",
-                  selected: tabsRouter.activeIndex == 0,
-                  onTap: () {
-                    if (tabsRouter.activeIndex == 0) {
-                      ref.read(chatsScreenNotifier.notifier).scrollToTop();
-                      return;
-                    }
-                    tabsRouter.setActiveIndex(0);
-                  },
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  colors: [
+                    Color.fromARGB(200, 146, 228, 194),
+                    Color.fromARGB(200, 182, 142, 226),
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
                 ),
-                const SizedBox(width: 15),
-                // _NavIcon(
-                //   icon: Icons.call,
-                //   selected: tabsRouter.activeIndex == 1,
-                //   onTap: () => tabsRouter.setActiveIndex(1),
-                // ),
-                // const SizedBox(width: 15),
-                _NavIcon(
-                  icon: "assets/images/settings.svg",
-                  selected: tabsRouter.activeIndex == 1,
-                  onTap: () => tabsRouter.setActiveIndex(1),
-                ),
-              ],
+                borderRadius: BorderRadius.circular(25),
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              child: Row(
+                children: [
+                  _NavIcon(
+                    icon: "assets/images/chat_1.svg",
+                    selected: tabsRouter.activeIndex == 0,
+                    onTap: () {
+                      if (tabsRouter.activeIndex == 0) {
+                        ref.read(chatsScreenNotifier.notifier).scrollToTop();
+                        return;
+                      }
+                      tabsRouter.setActiveIndex(0);
+                    },
+                  ),
+                  const SizedBox(width: 15),
+                  // _NavIcon(
+                  //   icon: Icons.call,
+                  //   selected: tabsRouter.activeIndex == 1,
+                  //   onTap: () => tabsRouter.setActiveIndex(1),
+                  // ),
+                  // const SizedBox(width: 15),
+                  _NavIcon(
+                    icon: "assets/images/settings.svg",
+                    selected: tabsRouter.activeIndex == 1,
+                    onTap: () => tabsRouter.setActiveIndex(1),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

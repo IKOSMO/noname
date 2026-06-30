@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:variable_blur/variable_blur.dart';
+import 'package:noname/tools/l10n/app_localizations.dart';
 
 @RoutePage()
 class ProfileScreen extends StatefulWidget {
@@ -59,6 +59,8 @@ class _ProfileScreenState extends State<ProfileScreen>
 
   @override
   Widget build(BuildContext context) {
+    final t = AppLocalizations.of(context)!;
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: SizedBox.expand(
@@ -68,16 +70,7 @@ class _ProfileScreenState extends State<ProfileScreen>
             SizedBox(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height * 0.5,
-              child: VariableBlur(
-                sigma: 14.0,
-                blurSides: BlurSides.vertical(top: 0.0, bottom: _offsetBlur),
-                quality: BlurQuality.high,
-                isYFlipNeed: true,
-                child: Image.asset(
-                  'assets/images/person.png',
-                  fit: BoxFit.cover,
-                ),
-              ),
+              child: Image.asset('assets/images/person.png', fit: BoxFit.cover),
             ),
             AnimatedPositioned(
               duration: Duration(milliseconds: 0),
@@ -140,7 +133,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                         borderRadius: BorderRadius.circular(25),
                       ),
                       child: Text(
-                        'Изм.',
+                        t.profile_edit,
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w400,
@@ -321,6 +314,8 @@ class _ProfileScreenState extends State<ProfileScreen>
   }
 
   Widget _buildMenu() {
+    final t = AppLocalizations.of(context)!;
+
     return Padding(
       padding: EdgeInsets.only(left: 15, right: 15, bottom: 15),
       child: Column(
@@ -382,7 +377,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                     children: [
                       Expanded(
                         child: _buttonMenu(
-                          text: 'звонок',
+                          text: t.call.toLowerCase(),
                           icon: Icons.call,
                           onTap: () {},
                           iconSize: 25,
@@ -391,7 +386,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                       const SizedBox(width: 5),
                       Expanded(
                         child: _buttonMenu(
-                          text: 'видео',
+                          text: t.video_call.toLowerCase(),
                           icon: Icons.videocam,
                           onTap: () {},
                           iconSize: 25,
@@ -400,7 +395,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                       const SizedBox(width: 5),
                       Expanded(
                         child: _buttonMenu(
-                          text: 'звук',
+                          text: t.profile_volume.toLowerCase(),
                           icon: Icons.notifications,
                           onTap: () {},
                           iconSize: 25,
@@ -409,7 +404,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                       const SizedBox(width: 5),
                       Expanded(
                         child: _buttonMenu(
-                          text: 'поиск',
+                          text: t.search.toLowerCase(),
                           icon: Icons.search,
                           onTap: () {},
                           iconSize: 25,
@@ -418,7 +413,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                       const SizedBox(width: 5),
                       Expanded(
                         child: _buttonMenu(
-                          text: 'ещё',
+                          text: t.more.toLowerCase(),
                           icon: Icons.more_horiz,
                           onTap: () {},
                           iconSize: 25,
@@ -436,6 +431,8 @@ class _ProfileScreenState extends State<ProfileScreen>
   }
 
   Widget _buildAccountInformation() {
+    final t = AppLocalizations.of(context)!;
+
     return Container(
       margin: EdgeInsets.all(15),
       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
@@ -449,7 +446,7 @@ class _ProfileScreenState extends State<ProfileScreen>
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            'мобильный',
+            t.profile_phone_number,
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w400,
@@ -462,7 +459,7 @@ class _ProfileScreenState extends State<ProfileScreen>
           ),
           Divider(color: const Color.fromARGB(20, 255, 255, 255)),
           Text(
-            'имя пользователя',
+            t.username,
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w400,
@@ -475,7 +472,7 @@ class _ProfileScreenState extends State<ProfileScreen>
           ),
           Divider(color: const Color.fromARGB(20, 255, 255, 255)),
           Text(
-            'дата рождения',
+            t.date_of_birthday,
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w400,
@@ -492,16 +489,18 @@ class _ProfileScreenState extends State<ProfileScreen>
   }
 
   PreferredSizeWidget _buildTabBar() {
+    final t = AppLocalizations.of(context)!;
+
     return TabBar(
       controller: _tabController,
       tabs: [
-        Tab(text: 'Медиа'),
-        Tab(text: 'Файлы'),
-        Tab(text: 'Музыка'),
-        Tab(text: 'Голосовые'),
-        Tab(text: 'Ссылки'),
-        Tab(text: 'GIF'),
-        Tab(text: 'Группы'),
+        Tab(text: t.media),
+        Tab(text: t.files),
+        Tab(text: t.music),
+        Tab(text: t.voice_message),
+        Tab(text: t.links),
+        Tab(text: t.gif),
+        Tab(text: t.groups),
       ],
       isScrollable: true,
       tabAlignment: TabAlignment.start,

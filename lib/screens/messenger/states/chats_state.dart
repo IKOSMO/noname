@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ChatsScreenState {
-  ChatsScreenState({required this.chatsListScrollController});
+class ChatsState {
+  ChatsState({required this.chatsListScrollController});
 
   final ScrollController chatsListScrollController;
 }
