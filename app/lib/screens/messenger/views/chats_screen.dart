@@ -1,7 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../tools/l10n/app_localizations.dart';
+import 'package:core/l10n/app_localizations.dart';
+
 import '../notifiers/chats_notifier.dart';
 import '../states/chats_state.dart';
 import '../../../tools/providers/providers.dart';

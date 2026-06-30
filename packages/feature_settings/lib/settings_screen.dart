@@ -1,16 +1,14 @@
 import 'dart:ui';
 import 'package:auto_route/auto_route.dart';
+import 'package:core/extensions/string_extensions.dart';
+import 'package:core/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../extensions/string_extensions.dart';
-import '../../tools/l10n/app_localizations.dart';
-// import 'package:noname/gen/i18n.g.dart';
 import 'components/gradient_text.dart';
 import 'components/settings_buttons_widgets.dart';
 import 'components/settings_item.dart';
+import 'providers/providers.dart';
 import 'states/user_data_state.dart';
-import '../../tools/providers/providers.dart';
-import '../../tools/router/app_router.gr.dart';
 
 @RoutePage()
 class SettingsScreen extends ConsumerStatefulWidget {
@@ -124,12 +122,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             title: t.notifications_title,
             icon: Icons.notifications_none,
             status: 'Все',
-            onTap: () => context.router.push(SettingsNotificationRoute()),
+            onTap: () {},
+            // onTap: () => context.router.push(SettingsNotificationRoute()),
           ),
           SettingsButton(
             title: t.confidentiality_title,
             icon: Icons.lock_outline,
-            onTap: () => context.router.push(SettingsConfidentialityRoute()),
+            onTap: () {},
+            // onTap: () => context.router.push(SettingsConfidentialityRoute()),
           ),
           SettingsButton(
             title: t.memory,
@@ -139,13 +139,15 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           SettingsButton(
             title: t.themes_title,
             icon: Icons.style_outlined,
-            onTap: () => context.router.push(SettingsThemeRoute()),
+            onTap: () {},
+            // onTap: () => context.router.push(SettingsThemeRoute()),
           ),
           LanguageButton(
             title: t.language_title,
             icon: Icons.language,
             language: notifier.getLanguageName(state.locale.languageCode),
-            onTap: () => context.router.push(SettingsLanguageRoute()),
+            onTap: () {},
+            // onTap: () => context.router.push(SettingsLanguageRoute()),
           ),
         ],
       ),

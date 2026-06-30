@@ -1,0 +1,41 @@
+name: core
+description: "A new Flutter package project."
+version: 0.0.1
+publish_to: none
+homepage:
+
+environment:
+  sdk: ^3.12.1
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  intl: any
+  flutter_riverpod: ^3.3.1
+  freezed_annotation: ^3.1.0
+  auto_route: ^11.1.0
+  auto_route_generator: ^10.5.0
+  path: ^1.9.1
+  path_provider: ^2.1.6
+  json_annotation: ^4.12.0
+  drift: ^2.34.0
+  sqlite3_flutter_libs: ^0.6.0+eol
+
+  
+  flutter_localizations:
+    sdk: flutter
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  freezed: ^3.2.5
+  build_runner: ^2.15.0
+  json_serializable: ^6.14.0
+  drift_dev: ^2.34.0
+
+
+flutter:

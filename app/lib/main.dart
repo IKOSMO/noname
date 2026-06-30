@@ -1,15 +1,15 @@
+import 'package:core/l10n/app_localizations.dart';
+import 'package:feature_settings/providers/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'database/app_database.dart';
-import 'tools/l10n/app_localizations.dart';
 import 'tools/providers/providers.dart';
 
-late final AppDatabase database;
+// late final AppDatabase database;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  database = AppDatabase();
+  // database = AppDatabase();
 
   runApp(const ProviderScope(child: MyApp()));
 }

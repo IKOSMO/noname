@@ -2,10 +2,9 @@ import 'dart:developer';
 
 import 'package:drift/drift.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../database/app_database.dart';
-import '../../../main.dart';
-import '../../../models/user_data_model/user_data_model.dart';
-import '../states/user_data_state.dart';
+import '/database/app_database.dart';
+import '/models/user_data_model/user_data_model.dart';
+import '/states/user_data_state.dart';
 
 class UserDataNotifier extends Notifier<UserDataState> {
   @override
@@ -25,6 +24,8 @@ class UserDataNotifier extends Notifier<UserDataState> {
   }
 
   Future<void> _loadUser() async {
+    final database = AppDatabase();
+
     final userDao = database.userDao;
     final user = await userDao.getUserById(1);
     if (user != null) {

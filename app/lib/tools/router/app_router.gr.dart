@@ -10,8 +10,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i18;
-import '../../screens/authorization/auth_cloud_password_screen.dart'
-    as _i1;
+import '../../screens/authorization/auth_cloud_password_screen.dart' as _i1;
 import '../../screens/authorization/auth_code_otp_screen.dart' as _i2;
 import '../../screens/authorization/auth_screen.dart' as _i3;
 import '../../screens/calls/calls_screen.dart' as _i4;
@@ -20,17 +19,14 @@ import '../../screens/messenger/views/chat_screen.dart' as _i5;
 import '../../screens/messenger/views/chats_screen.dart' as _i6;
 import '../../screens/messenger/views/chats_shell_screen.dart' as _i7;
 import '../../screens/profile/views/profile_screen.dart' as _i9;
-import '../../screens/registration/reg_cloud_password_screen.dart'
-    as _i10;
+import '../../screens/registration/reg_cloud_password_screen.dart' as _i10;
 import '../../screens/registration/reg_code_otp_screen.dart' as _i11;
 import '../../screens/registration/registration_screen.dart' as _i12;
-import '../../screens/settings/settings_confidentiality_screen.dart'
-    as _i13;
-import '../../screens/settings/settings_language_screen.dart' as _i14;
-import '../../screens/settings/settings_notification_screen.dart'
-    as _i15;
-import '../../screens/settings/settings_screen.dart' as _i16;
-import '../../screens/settings/settings_theme_screen.dart' as _i17;
+import 'package:feature_settings/settings_confidentiality_screen.dart' as _i13;
+import 'package:feature_settings/settings_language_screen.dart' as _i14;
+import 'package:feature_settings/settings_notification_screen.dart' as _i15;
+import 'package:feature_settings/settings_screen.dart' as _i16;
+import 'package:feature_settings/settings_theme_screen.dart' as _i17;
 
 /// generated route for
 /// [_i1.AuthCloudPasswordScreen]

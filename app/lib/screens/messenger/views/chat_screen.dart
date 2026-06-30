@@ -2,7 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../../tools/l10n/app_localizations.dart';
+import 'package:core/l10n/app_localizations.dart';
+
 import '../../../models/messages/base_message_model.dart';
 import '../components/messages/base_message_widget.dart';
 import '../../../tools/router/app_router.gr.dart';

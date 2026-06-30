@@ -3,66 +3,99 @@ import 'dart:ui';
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../tools/l10n/app_localizations.dart';
+import 'package:core/l10n/app_localizations.dart';
 import 'components/settings_buttons_widgets.dart';
 import 'components/settings_item.dart';
-import 'states/settings_state.dart';
-import '../../tools/providers/providers.dart';
+
+import 'providers/providers.dart';
 
 @RoutePage()
-class SettingsThemeScreen extends ConsumerStatefulWidget {
-  const SettingsThemeScreen({super.key});
+class SettingsConfidentialityScreen extends ConsumerStatefulWidget {
+  const SettingsConfidentialityScreen({super.key});
 
   @override
-  ConsumerState<SettingsThemeScreen> createState() =>
-      _SettingsThemeScreenState();
+  ConsumerState<SettingsConfidentialityScreen> createState() =>
+      _SettingsNotificationScreenState();
 }
 
-class _SettingsThemeScreenState extends ConsumerState<SettingsThemeScreen> {
-  List<SettingsItem> _settings({
-    required BuildContext context,
-    required SettingsState state,
-  }) {
+class _SettingsNotificationScreenState
+    extends ConsumerState<SettingsConfidentialityScreen> {
+  List<SettingsItem> _settings({required BuildContext context}) {
     final t = AppLocalizations.of(context)!;
-
+    
     return [
       SettingsGroup(
-        title: t.themes_subtitle,
         items: [
-          SettingsSwitchButton(
-            title: t.light_theme,
-            isOn: state.themeMode == ThemeMode.light,
-            showChevron: false,
-            onChanged: (bool value) {
-              ref
-                  .read(settingsNotifier.notifier)
-                  .changeTheme(value: ThemeMode.light);
-            },
+          SettingsButton(
+            title: t.black_list,
+            icon: Icons.block_rounded,
+            onTap: () {},
           ),
-          SettingsSwitchButton(
-            title: t.dark_theme,
-            isOn: state.themeMode == ThemeMode.dark,
-            showChevron: false,
-            onChanged: (bool value) {
-              ref
-                  .read(settingsNotifier.notifier)
-                  .changeTheme(value: ThemeMode.dark);
-            },
+          SettingsButton(
+            title: t.cloud_password,
+            icon: Icons.lock_outline_rounded,
+            onTap: () {},
+          ),
+          SettingsButton(
+            title: t.auto_delete_messages,
+            icon: Icons.timer_outlined,
+            onTap: () {},
           ),
         ],
+      ),
+
+      SettingsSwitchButton(
+        title: t.button_sos_title,
+        isOn: false,
+        onChanged: (bool value) {
+          ref
+              .read(settingsNotifier.notifier)
+              .changeIsOnNameInNotification(value: value);
+        },
+        description: t.button_sos_description,
+      ),
+
+      SettingsGroup(
+        title: t.confidentiality_title,
+        items: [
+          SettingsButton(
+            title: t.phone_number,
+            onTap: () {},
+          ),
+          SettingsButton(
+            title: t.entry_time,
+            onTap: () {},
+          ),
+          SettingsButton(
+            title: t.profile_images,
+            onTap: () {},
+          ),
+          SettingsButton(
+            title: t.groups_and_channels,
+            onTap: () {},
+          ),
+          SettingsButton(
+            title: t.date_of_birthday,
+            onTap: () {},
+          ),
+        ],
+      ),
+
+      SettingsButton(
+        title: t.login_email,
+        icon: Icons.alternate_email_rounded,
+        onTap: () {},
       ),
     ];
   }
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(settingsNotifier);
     final t = AppLocalizations.of(context)!;
-
-    final settings = _settings(context: context, state: state);
+    final settings = _settings(context: context);
 
     return Scaffold(
-      key: ValueKey(state.themeMode),
+      backgroundColor: Colors.black,
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(MediaQuery.paddingOf(context).top + 10),
@@ -78,7 +111,7 @@ class _SettingsThemeScreenState extends ConsumerState<SettingsThemeScreen> {
                 elevation: 0,
                 surfaceTintColor: Colors.transparent,
                 title: Text(
-                  t.themes_title,
+                  t.confidentiality_title,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: MediaQuery.sizeOf(context).width * 0.05,

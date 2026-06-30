@@ -1,9 +1,10 @@
 import 'dart:developer';
 
+import 'package:feature_settings/components/gradient_icon.dart';
 import 'package:flutter/material.dart';
 import '../../../../models/messages/base_message_model.dart';
 import 'text_message_widget.dart';
-import '../../../settings/components/gradient_icon.dart';
+// import '../../../../../../packages/feature_settings/lib/components/gradient_icon.dart';
 
 class BaseMessageWidget extends StatefulWidget {
   const BaseMessageWidget({super.key, required this.message});

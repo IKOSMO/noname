@@ -1,12 +1,12 @@
 import 'dart:ui';
 
 import 'package:auto_route/annotations.dart';
+import 'package:core/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../tools/l10n/app_localizations.dart';
 import 'components/settings_buttons_widgets.dart';
 import 'components/settings_item.dart';
-import '../../tools/providers/providers.dart';
+import 'providers/providers.dart';
 
 @RoutePage()
 class SettingsLanguageScreen extends ConsumerStatefulWidget {
@@ -48,7 +48,6 @@ class _SettingsThemeScreenState extends ConsumerState<SettingsLanguageScreen> {
   Widget build(BuildContext context) {
     final t = AppLocalizations.of(context)!;
     final settings = _settings(context: context);
-    final state = ref.watch(settingsNotifier);
 
     return Scaffold(
       backgroundColor: Colors.black,
