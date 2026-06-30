@@ -29,6 +29,7 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: SettingsConfidentialityRoute.page),
     AutoRoute(page: SettingsThemeRoute.page),
     AutoRoute(page: SettingsLanguageRoute.page),
+    AutoRoute(page: SettingsFullscreenImageRoute.page, fullscreenDialog: true),
 
     AutoRoute(
       page: HomeRoute.page,

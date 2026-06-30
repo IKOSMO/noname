@@ -1,10 +1,11 @@
+import 'dart:developer';
 import 'dart:ui';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:noname/extensions/string_extensions.dart';
+import 'package:noname/screens/settings/settings_pick_image_modal.dart';
 import 'package:noname/tools/l10n/app_localizations.dart';
-// import 'package:noname/gen/i18n.g.dart';
 import 'package:noname/screens/settings/components/gradient_text.dart';
 import 'package:noname/screens/settings/components/settings_buttons_widgets.dart';
 import 'package:noname/screens/settings/components/settings_item.dart';
@@ -46,70 +47,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         icon: Icons.add_a_photo_outlined,
         showChevron: false,
         onTap: () async {
-          await showModalBottomSheet(
-            context: context,
-            isScrollControlled: true,
-            backgroundColor: Colors.transparent,
-            builder: (context) {
-              return DraggableScrollableSheet(
-                initialChildSize: 0.6,
-                minChildSize: 0.6,
-                maxChildSize: 0.9,
-                expand: false,
-                snap: true,
-                snapSizes: [0.6, 0.9],
-                builder: (context, scrollController) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(20),
-                      ),
-                    ),
-                    clipBehavior: Clip.hardEdge,
-                    child: Stack(
-                      children: [
-                        GridView.builder(
-                          controller: scrollController,
-                          padding: EdgeInsets.only(top: 70),
-                          itemCount: 30,
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 3,
-                                crossAxisSpacing: 1.0,
-                                mainAxisSpacing: 1.0,
-                                childAspectRatio: 1.0,
-                              ),
-                          itemBuilder: (context, index) {
-                            return Container(
-                              color: Colors.blue[100],
-                              child: Center(child: Text('Элемент $index')),
-                            );
-                          },
-                        ),
-                        Positioned(
-                          top: 0,
-                          left: 0,
-                          right: 0,
-                          child: ClipRect(
-                            child: BackdropFilter(
-                              filter: ImageFilter.blur(sigmaX: 1.0, sigmaY: 1.0),
-                              child: Container(
-                                height: 60,
-                                decoration: BoxDecoration(
-                                  color: const Color.fromARGB(41, 0, 0, 0),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              );
-            },
-          );
+          await SettingsPickImageModal.showModal(context);
         },
       ),
       SettingsButton(

@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:noname/database/app_database.dart';
 import 'package:noname/tools/l10n/app_localizations.dart';
 import 'package:noname/tools/providers/providers.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 late final AppDatabase database;
 
@@ -11,7 +12,17 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   database = AppDatabase();
 
+  await _init();
+
   runApp(const ProviderScope(child: MyApp()));
+}
+
+Future<void> _init() async {
+  await _requestPermissions();
+}
+
+Future<void> _requestPermissions() async {
+  await [Permission.photos, Permission.storage].request();
 }
 
 class MyApp extends ConsumerWidget {
